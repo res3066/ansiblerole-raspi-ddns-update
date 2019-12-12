@@ -1,0 +1,21 @@
+#
+# to install (had trouble getting it to actually start without reboot <shrug>
+#
+#  sudo cp autossh.service /etc/systemd/system/ ; sudo systemctl enable autossh.service ; sudo reboot
+ 
+[Unit]
+Description=Keep ddns-update script running forever
+After=network.target
+
+[Service]
+User=pi
+
+ExecStart=/home/pi/updateme
+
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+

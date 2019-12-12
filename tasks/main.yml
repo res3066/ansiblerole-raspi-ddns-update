@@ -1,0 +1,15 @@
+---
+# tasks file for raspi-ddns-update
+#
+
+  - name: copying systemd service file for isc-dhcpd
+    copy: src=ddns-update.service dest=/lib/systemd/system/ owner=root mode=0644
+
+  - name: updateme script
+    template: src=updateme.j2 dest=/home/pi/updateme mode=0755 owner=root group=root
+
+  - name: enabled in systemd
+    systemd: name=ddns-update.service enabled=yes state=restarted
+
+...
+
